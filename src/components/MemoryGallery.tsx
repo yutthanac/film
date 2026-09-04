@@ -65,29 +65,25 @@ export default function MemoryGallery() {
   return (
     <section className="py-16 px-4 max-w-6xl mx-auto">
       <div className="text-center mb-12">
-        <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-rose-100 text-rose-700 text-xs font-semibold mb-3">
-          <Camera className="w-3.5 h-3.5" />
-          <span>Our Sweet Memories</span>
-        </div>
-        <h3 className="text-3xl md:text-4xl font-bold text-slate-800 mb-3">
-          แกลเลอรีบันทึกความทรงจำ 📸
+        <h3 className="text-3xl md:text-4xl font-normal text-slate-800 mb-3">
+          ชิวาวาาาาาาาาาาา
         </h3>
-        <p className="text-rose-900/70 max-w-lg mx-auto text-sm md:text-base">
+        <p className="text-slate-500 max-w-lg mx-auto text-sm md:text-base">
           ทุกช่วงเวลาที่ได้อยู่ด้วยกัน คือของขวัญที่ดีที่สุดของเค้าเลยนะ
         </p>
       </div>
 
-      {/* Polaroid Grid */}
+      {/* Polaroid Grid with Neumorphic frames */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
         {memories.map((memory) => {
           const isLiked = likedIds.includes(memory.id);
           return (
             <div
               key={memory.id}
-              className={`bg-white p-4 pb-6 rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 hover:rotate-0 border border-slate-100 ${memory.rotation} flex flex-col justify-between`}
+              className={`neu-card p-4 pb-6 transition-all duration-300 transform hover:-translate-y-2 ${memory.rotation} flex flex-col justify-between`}
             >
               {/* Photo Area */}
-              <div className="relative aspect-[4/3] w-full rounded-lg overflow-hidden mb-4 bg-slate-100">
+              <div className="relative aspect-[4/3] w-full rounded-xl overflow-hidden mb-4 neu-inset">
                 <Image
                   src={memory.image}
                   alt={memory.title}
@@ -97,7 +93,7 @@ export default function MemoryGallery() {
                 />
                 <button
                   onClick={() => toggleLike(memory.id)}
-                  className="absolute top-2.5 right-2.5 p-2 rounded-full bg-white/80 hover:bg-white backdrop-blur-sm shadow-md transition-transform active:scale-90"
+                  className="absolute top-2.5 right-2.5 p-2 neu-pill bg-[#eef2f6]/90 transition-transform active:scale-90"
                   aria-label="Like memory"
                 >
                   <Heart
@@ -123,7 +119,7 @@ export default function MemoryGallery() {
                 <h4 className="font-semibold text-slate-800 text-base mb-1">
                   {memory.title}
                 </h4>
-                <p className="text-xs text-slate-600 font-light leading-relaxed">
+                <p className="text-xs text-slate-500 font-light leading-relaxed">
                   &quot;{memory.caption}&quot;
                 </p>
               </div>

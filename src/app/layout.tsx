@@ -41,7 +41,7 @@ export default function RootLayout({
       lang="th"
       className={`${prompt.variable} ${dancingScript.variable} ${itim.variable} ${mali.variable} h-full antialiased scroll-smooth`}
     >
-      <body className="min-h-full flex flex-col font-sans bg-gradient-to-b from-rose-50 via-pink-50/50 to-amber-50/30 text-rose-950 selection:bg-rose-200 selection:text-rose-900">
+      <body className="min-h-full flex flex-col font-sans bg-[#eef2f6] text-slate-700 selection:bg-rose-200 selection:text-rose-900">
         {children}
       </body>
     </html>

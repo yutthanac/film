@@ -158,7 +158,7 @@ export default function MusicPlayer() {
 
       {/* Volume Slider Popup */}
       {showVolumeSlider && (
-        <div className="absolute bottom-16 right-16 bg-white/95 backdrop-blur-md rounded-2xl p-3 shadow-2xl border border-rose-200 animate-scale-up text-slate-800 mb-2 flex flex-col items-center gap-2">
+        <div className="absolute bottom-16 right-16 neu-card p-3 shadow-2xl mb-2 flex flex-col items-center gap-2">
           <div className="text-[11px] font-semibold text-rose-600 flex items-center gap-1">
             <span>ระดับเสียง: {volume}%</span>
           </div>
@@ -173,27 +173,27 @@ export default function MusicPlayer() {
               aria-label="Volume slider"
             />
           </div>
-          <div className="flex gap-1.5 pt-1 border-t border-rose-100">
+          <div className="flex gap-1.5 pt-2 border-t border-slate-300/40">
             <button
               onClick={() => handleVolumeChange(20)}
-              className={`px-2 py-0.5 rounded text-[10px] ${
-                volume === 20 ? "bg-rose-500 text-white" : "bg-rose-50 text-rose-600 hover:bg-rose-100"
+              className={`px-2 py-1 rounded-lg text-[10px] font-medium transition-all ${
+                volume === 20 ? "neu-pressed text-rose-600 font-bold" : "neu-btn text-slate-600"
               }`}
             >
               เบา
             </button>
             <button
               onClick={() => handleVolumeChange(40)}
-              className={`px-2 py-0.5 rounded text-[10px] ${
-                volume === 40 ? "bg-rose-500 text-white" : "bg-rose-50 text-rose-600 hover:bg-rose-100"
+              className={`px-2 py-1 rounded-lg text-[10px] font-medium transition-all ${
+                volume === 40 ? "neu-pressed text-rose-600 font-bold" : "neu-btn text-slate-600"
               }`}
             >
               พอดี
             </button>
             <button
               onClick={() => handleVolumeChange(70)}
-              className={`px-2 py-0.5 rounded text-[10px] ${
-                volume === 70 ? "bg-rose-500 text-white" : "bg-rose-50 text-rose-600 hover:bg-rose-100"
+              className={`px-2 py-1 rounded-lg text-[10px] font-medium transition-all ${
+                volume === 70 ? "neu-pressed text-rose-600 font-bold" : "neu-btn text-slate-600"
               }`}
             >
               ดัง
@@ -204,8 +204,8 @@ export default function MusicPlayer() {
 
       {/* Section selector dropdown popup */}
       {isMenuOpen && (
-        <div className="absolute bottom-16 right-0 w-72 bg-white/95 backdrop-blur-md rounded-2xl p-3 shadow-2xl border border-rose-200 animate-scale-up text-slate-800 mb-2">
-          <div className="flex items-center justify-between pb-2 mb-2 border-b border-rose-100 text-xs font-semibold text-rose-600">
+        <div className="absolute bottom-16 right-0 w-72 neu-card p-3.5 mb-2 text-slate-800">
+          <div className="flex items-center justify-between pb-2 mb-2 border-b border-slate-300/40 text-xs font-semibold text-rose-600">
             <span>🎵 เลือกท่อนเพลงที่อยากฟัง:</span>
             <button
               onClick={() => setIsMenuOpen(false)}
@@ -214,37 +214,25 @@ export default function MusicPlayer() {
               ✕
             </button>
           </div>
-          <div className="space-y-1.5 max-h-56 overflow-y-auto">
+          <div className="space-y-2 max-h-56 overflow-y-auto">
             {SECTIONS.map((sec) => (
               <button
                 key={sec.name}
                 onClick={() => handleSelectSection(sec)}
                 className={`w-full text-left px-3 py-2 rounded-xl text-xs transition-all flex flex-col gap-0.5 ${
                   selectedSection.name === sec.name
-                    ? "bg-rose-500 text-white font-medium shadow-sm"
-                    : "hover:bg-rose-50 text-slate-700"
+                    ? "neu-pressed text-rose-600 font-medium"
+                    : "neu-btn text-slate-700 hover:text-rose-600"
                 }`}
               >
                 <div className="flex items-center justify-between">
                   <span className="font-semibold">{sec.name}</span>
-                  <span
-                    className={`text-[10px] ${
-                      selectedSection.name === sec.name
-                        ? "text-rose-100"
-                        : "text-slate-400"
-                    }`}
-                  >
+                  <span className="text-[10px] text-slate-400">
                     {Math.floor(sec.start / 60)}:
                     {(sec.start % 60).toString().padStart(2, "0")}
                   </span>
                 </div>
-                <span
-                  className={`text-[11px] truncate ${
-                    selectedSection.name === sec.name
-                      ? "text-rose-100"
-                      : "text-slate-500"
-                  }`}
-                >
+                <span className="text-[11px] truncate text-slate-500">
                   {sec.description}
                 </span>
               </button>
@@ -254,7 +242,7 @@ export default function MusicPlayer() {
       )}
 
       {/* Main Mini Player Bar */}
-      <div className="glass-card pl-3 pr-4 py-2.5 rounded-full shadow-xl flex items-center gap-2.5 border border-rose-200/80 hover:shadow-2xl transition-all">
+      <div className="neu-flat pl-3 pr-4 py-2.5 rounded-full flex items-center gap-2.5">
         {/* Disc / Icon spinning */}
         <div
           onClick={() => setIsMenuOpen(!isMenuOpen)}
