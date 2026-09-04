@@ -1,0 +1,96 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --font-sans: var(--font-prompt), sans-serif;
+  }
+}
+
+body {
+  font-family: var(--font-prompt), system-ui, -apple-system, sans-serif;
+}
+
+@font-face {
+  font-family: "MN Pae Kuai";
+  src: url("/fonts/MN%20Pae%20Kuai.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "MN Pae Kuai";
+  src: url("/fonts/MN%20Pae%20Kuai%20Italic.ttf") format("truetype");
+  font-weight: normal;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "MN Pae Kuai";
+  src: url("/fonts/MN%20Pae%20Kuai%20Light.ttf") format("truetype");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+.font-script {
+  font-family: var(--font-dancing), cursive, serif;
+}
+
+.font-peakuay {
+  font-family: "MN Pae Kuai", "MN Paekuai", var(--font-mali), var(--font-itim), cursive, sans-serif;
+}
+
+.font-itim {
+  font-family: var(--font-itim), cursive, sans-serif;
+}
+
+.font-mali {
+  font-family: var(--font-mali), cursive, sans-serif;
+}
+
+
+@keyframes float-slow {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-12px) rotate(3deg);
+  }
+}
+
+@keyframes pulse-subtle {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.9;
+  }
+  50% {
+    transform: scale(1.05);
+    opacity: 1;
+  }
+}
+
+.animate-float {
+  animation: float-slow 4s ease-in-out infinite;
+}
+
+.animate-pulse-glow {
+  animation: pulse-subtle 2.5s ease-in-out infinite;
+}
+
+/* Glassmorphism utility */
+.glass-panel {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+}
+
+.glass-card {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(253, 226, 236, 0.8);
+}
+
