@@ -33,7 +33,7 @@ const mali = Mali({
 });
 
 export const metadata: Metadata = {
-  title: "Happy Birthday My Love 🎂💖 | สุขสันต์วันเกิดนะคนดี",
+  title: "Filmy | สุขสันต์วันเกิดนะจ๊ะ",
   description: "Special birthday surprise website made with love for my favorite person in the universe.",
 };
 
