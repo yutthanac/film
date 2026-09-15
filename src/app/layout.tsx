@@ -1,6 +1,12 @@
 import type { Metadata } from "next";
-import { Prompt, Dancing_Script, Itim, Mali } from "next/font/google";
+import { Prompt, Dancing_Script, Itim, Mali, Noto_Sans_Thai } from "next/font/google";
 import "./globals.css";
+
+const notoSansThai = Noto_Sans_Thai({
+  weight: ["300", "400", "500", "600", "700"],
+  subsets: ["latin", "thai"],
+  variable: "--font-noto-thai",
+});
 
 const prompt = Prompt({
   weight: ["300", "400", "500", "600", "700"],
@@ -39,7 +45,7 @@ export default function RootLayout({
   return (
     <html
       lang="th"
-      className={`${prompt.variable} ${dancingScript.variable} ${itim.variable} ${mali.variable} h-full antialiased scroll-smooth`}
+      className={`${prompt.variable} ${dancingScript.variable} ${itim.variable} ${mali.variable} ${notoSansThai.variable} h-full antialiased scroll-smooth`}
     >
       <body className="min-h-full flex flex-col font-sans bg-[#eef2f6] text-slate-700 selection:bg-rose-200 selection:text-rose-900">
         {children}

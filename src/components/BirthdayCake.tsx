@@ -43,7 +43,8 @@ export default function BirthdayCake() {
   };
 
   return (
-    <section id="cake-section" className="py-14 px-4 flex flex-col items-center">
+    <section id="cake-section" className="relative py-16 px-4 flex flex-col items-center overflow-hidden">
+      <div className="absolute inset-0 editorial-grid pointer-events-none opacity-40 -z-10" />
       <div className="max-w-xl w-full flex flex-col items-center text-center relative">
         {/* Aesthetic 2D Matcha Cake */}
         <MatchaCake2D isLit={isLit} onCandleClick={blowCandles} />

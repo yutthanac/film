@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import Link from "next/link";
 import { motion, useMotionValue, useTransform, AnimatePresence } from "framer-motion";
 import confetti from "canvas-confetti";
 import { Sparkles, Gift, RotateCcw, ChevronDown, Heart } from "lucide-react";
@@ -33,10 +34,11 @@ export default function RibbonGiftSection() {
   };
 
   return (
-    <section className="py-20 px-4 max-w-5xl mx-auto text-center flex flex-col items-center">
+    <section id="ribbon-gift-section" className="relative py-20 px-4 max-w-5xl mx-auto text-center flex flex-col items-center overflow-hidden">
+      <div className="absolute inset-0 editorial-grid pointer-events-none opacity-40 -z-10" />
       {/* Title */}
       <h3 className="text-3xl md:text-4xl font-normal text-slate-800 mb-2">
-        มีของขวัญอีกชิ้นนึงงงงง ✨
+        ดึงริบบิ้นลง
       </h3>
       <p className="text-slate-500 max-w-md mx-auto text-sm md:text-base mb-12">
         {isOpened
@@ -231,10 +233,6 @@ export default function RibbonGiftSection() {
                 </motion.div>
 
                 {/* Hint Guide */}
-                <div className="mt-4 text-xs text-slate-400 flex items-center gap-1.5">
-                  <Sparkles className="w-3.5 h-3.5 text-amber-500" />
-                  <span>ลากริบบิ้นลงมา หรือคลิกที่ตัวกล่องเพื่อเปิด 🎁</span>
-                </div>
               </div>
             </motion.div>
           ) : (
@@ -280,6 +278,16 @@ export default function RibbonGiftSection() {
             </motion.div>
           )}
         </AnimatePresence>
+
+        {/* Mystery Button to Anniversary Tracker */}
+        <div className="mt-14 flex justify-center">
+          <Link
+            href="/anniversary"
+            className="neu-btn px-7 py-2.5 rounded-full inline-flex items-center gap-2 text-xs font-mono text-slate-600 hover:text-slate-900 transition-all transform hover:-translate-y-0.5 active:scale-95 shadow-sm"
+          >
+            <span>กดตรงนี้</span>
+          </Link>
+        </div>
       </div>
     </section>
   );

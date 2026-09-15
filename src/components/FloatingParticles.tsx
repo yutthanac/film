@@ -24,7 +24,10 @@ export default function FloatingParticles() {
       delay: Math.random() * 8,
       emoji: emojis[Math.floor(Math.random() * emojis.length)],
     }));
-    setItems(generated);
+    const timer = setTimeout(() => {
+      setItems(generated);
+    }, 0);
+    return () => clearTimeout(timer);
   }, []);
 
   return (

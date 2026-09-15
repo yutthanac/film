@@ -53,6 +53,10 @@ body {
   font-family: var(--font-mali), cursive, sans-serif;
 }
 
+.font-noto {
+  font-family: var(--font-noto-thai), sans-serif;
+}
+
 /* Neumorphic Shadows & Surfaces */
 .neu-flat {
   background: #eef2f6;
@@ -108,5 +112,65 @@ body {
 .neu-accent-btn:active {
   box-shadow: inset 3px 3px 6px #be185d, inset -3px -3px 6px #f43f5e;
 }
+
+/* Editorial Film Journal Utilities */
+.film-grain {
+  background-image: radial-gradient(rgba(15, 23, 42, 0.035) 1px, transparent 0);
+  background-size: 12px 12px;
+}
+
+.editorial-grid {
+  background-image: 
+    linear-gradient(to right, rgba(100, 116, 139, 0.12) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(100, 116, 139, 0.12) 1px, transparent 1px);
+  background-size: 3rem 3rem;
+  mask-image: radial-gradient(ellipse 80% 60% at 50% 50%, #000 50%, transparent 100%);
+  -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 50%, #000 50%, transparent 100%);
+}
+
+.editorial-grid-dark {
+  background-image: 
+    linear-gradient(to right, rgba(255, 255, 255, 0.08) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.08) 1px, transparent 1px);
+  background-size: 3rem 3rem;
+  mask-image: radial-gradient(ellipse 85% 65% at 50% 45%, #000 50%, transparent 100%);
+  -webkit-mask-image: radial-gradient(ellipse 85% 65% at 50% 45%, #000 50%, transparent 100%);
+}
+
+.film-border {
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  box-shadow: 0 24px 48px -12px rgba(15, 23, 42, 0.1), 0 0 0 1px rgba(255, 255, 255, 0.8) inset;
+}
+
+.film-tag {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-size: 0.6875rem;
+}
+
+/* Shadcn theme tokens compatibility */
+:root {
+  --background: 210 40% 98%;
+  --foreground: 222.2 84% 4.9%;
+  --card: 0 0% 100%;
+  --card-foreground: 222.2 84% 4.9%;
+  --primary: 222.2 47.4% 11.2%;
+  --primary-foreground: 210 40% 98%;
+  --muted: 210 40% 96.1%;
+  --muted-foreground: 215.4 16.3% 46.9%;
+  --border: 214.3 31.8% 91.4%;
+}
+
+.bg-card { background-color: hsl(var(--card)); }
+.text-card-foreground { color: hsl(var(--card-foreground)); }
+.bg-primary { background-color: hsl(var(--primary)); }
+.text-primary { color: hsl(var(--primary)); }
+.text-primary-foreground { color: hsl(var(--primary-foreground)); }
+.bg-primary\/10 { background-color: hsla(var(--primary) / 0.1); }
+.stroke-primary { stroke: hsl(var(--primary)); }
+.stroke-primary\/10 { stroke: hsla(var(--primary) / 0.1); }
+.text-muted-foreground { color: hsl(var(--muted-foreground)); }
+
 
 

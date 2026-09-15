@@ -53,7 +53,7 @@ export default function MusicPlayer() {
   const [selectedSection, setSelectedSection] = useState<SongSection>(SECTIONS[0]);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isReady, setIsReady] = useState(false);
-  const [volume, setVolume] = useState(40); // Default comfortable volume (40%)
+  const [volume, setVolume] = useState(10); // Default gentle volume (10%)
   const [showVolumeSlider, setShowVolumeSlider] = useState(false);
 
   const playerRef = useRef<YTPlayer | null>(null);
@@ -83,7 +83,7 @@ export default function MusicPlayer() {
           events: {
             onReady: (event) => {
               setIsReady(true);
-              event.target.setVolume(40);
+              event.target.setVolume(0);
             },
             onStateChange: (event) => {
               if (window.YT && window.YT.PlayerState) {
@@ -114,6 +114,63 @@ export default function MusicPlayer() {
       }
     };
   }, []);
+
+  // Auto-play after 5s delay with smooth volume ramp-up to 40% (medium volume)
+  useEffect(() => {
+    if (!isReady || !playerRef.current) return;
+
+    let fadeInterval: NodeJS.Timeout | null = null;
+    let hasTriggered = false;
+
+    const startFadeIn = () => {
+      if (hasTriggered || !playerRef.current) return;
+      hasTriggered = true;
+
+      try {
+        playerRef.current.setVolume(0);
+        playerRef.current.seekTo(SECTIONS[0].start, true);
+        playerRef.current.playVideo();
+        setIsPlaying(true);
+        setVolume(0);
+
+        let cur = 0;
+        const target = 10; // Gentle volume (10%)
+        fadeInterval = setInterval(() => {
+          cur += 1;
+          if (cur >= target) {
+            cur = target;
+            if (fadeInterval) clearInterval(fadeInterval);
+          }
+          if (playerRef.current) {
+            playerRef.current.setVolume(cur);
+          }
+          setVolume(cur);
+        }, 150);
+      } catch (err) {
+        console.warn("Audio autoplay deferred to user interaction:", err);
+      }
+    };
+
+    // 5 seconds countdown
+    const timer = setTimeout(() => {
+      startFadeIn();
+    }, 5000);
+
+    // In case browser policy restricts audio until interaction
+    const handleGesture = () => {
+      startFadeIn();
+    };
+
+    window.addEventListener("scroll", handleGesture, { once: true });
+    window.addEventListener("click", handleGesture, { once: true });
+
+    return () => {
+      clearTimeout(timer);
+      if (fadeInterval) clearInterval(fadeInterval);
+      window.removeEventListener("scroll", handleGesture);
+      window.removeEventListener("click", handleGesture);
+    };
+  }, [isReady]);
 
   const togglePlay = () => {
     if (!playerRef.current) return;
@@ -175,28 +232,28 @@ export default function MusicPlayer() {
           </div>
           <div className="flex gap-1.5 pt-2 border-t border-slate-300/40">
             <button
-              onClick={() => handleVolumeChange(20)}
+              onClick={() => handleVolumeChange(10)}
               className={`px-2 py-1 rounded-lg text-[10px] font-medium transition-all ${
-                volume === 20 ? "neu-pressed text-rose-600 font-bold" : "neu-btn text-slate-600"
+                volume === 10 ? "neu-pressed text-rose-600 font-bold" : "neu-btn text-slate-600"
               }`}
             >
-              เบา
+              10%
             </button>
             <button
-              onClick={() => handleVolumeChange(40)}
+              onClick={() => handleVolumeChange(25)}
               className={`px-2 py-1 rounded-lg text-[10px] font-medium transition-all ${
-                volume === 40 ? "neu-pressed text-rose-600 font-bold" : "neu-btn text-slate-600"
+                volume === 25 ? "neu-pressed text-rose-600 font-bold" : "neu-btn text-slate-600"
               }`}
             >
-              พอดี
+              25%
             </button>
             <button
-              onClick={() => handleVolumeChange(70)}
+              onClick={() => handleVolumeChange(50)}
               className={`px-2 py-1 rounded-lg text-[10px] font-medium transition-all ${
-                volume === 70 ? "neu-pressed text-rose-600 font-bold" : "neu-btn text-slate-600"
+                volume === 50 ? "neu-pressed text-rose-600 font-bold" : "neu-btn text-slate-600"
               }`}
             >
-              ดัง
+              50%
             </button>
           </div>
         </div>

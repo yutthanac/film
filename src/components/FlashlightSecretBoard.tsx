@@ -66,29 +66,13 @@ export default function FlashlightSecretBoard() {
   const isAllFound = foundIds.length === SECRETS.length;
 
   useEffect(() => {
-    setIsMobile("ontouchstart" in window || navigator.maxTouchPoints > 0);
+    const timer = setTimeout(() => {
+      setIsMobile("ontouchstart" in window || navigator.maxTouchPoints > 0);
+    }, 0);
+    return () => clearTimeout(timer);
   }, []);
 
-  const handleMouseMove = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
-    if (!containerRef.current) return;
-    const rect = containerRef.current.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-    setMousePos({ x, y });
-    checkDiscovery(x, y, rect.width, rect.height);
-  }, [foundIds]);
-
-  const handleTouchMove = useCallback((e: React.TouchEvent<HTMLDivElement>) => {
-    if (!containerRef.current || !e.touches[0]) return;
-    const rect = containerRef.current.getBoundingClientRect();
-    const x = e.touches[0].clientX - rect.left;
-    const y = e.touches[0].clientY - rect.top;
-    setMousePos({ x, y });
-    setIsInside(true);
-    checkDiscovery(x, y, rect.width, rect.height);
-  }, [foundIds]);
-
-  const checkDiscovery = (x: number, y: number, width: number, height: number) => {
+  const checkDiscovery = useCallback((x: number, y: number, width: number, height: number) => {
     SECRETS.forEach((item) => {
       const itemX = (item.x / 100) * width;
       const itemY = (item.y / 100) * height;
@@ -110,10 +94,30 @@ export default function FlashlightSecretBoard() {
         });
       }
     });
-  };
+  }, [foundIds]);
+
+  const handleMouseMove = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
+    if (!containerRef.current) return;
+    const rect = containerRef.current.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    setMousePos({ x, y });
+    checkDiscovery(x, y, rect.width, rect.height);
+  }, [checkDiscovery]);
+
+  const handleTouchMove = useCallback((e: React.TouchEvent<HTMLDivElement>) => {
+    if (!containerRef.current || !e.touches[0]) return;
+    const rect = containerRef.current.getBoundingClientRect();
+    const x = e.touches[0].clientX - rect.left;
+    const y = e.touches[0].clientY - rect.top;
+    setMousePos({ x, y });
+    setIsInside(true);
+    checkDiscovery(x, y, rect.width, rect.height);
+  }, [checkDiscovery]);
 
   return (
-    <section className="py-20 px-4 max-w-5xl mx-auto text-center">
+    <section id="secret-section" className="relative py-20 px-4 max-w-5xl mx-auto text-center overflow-hidden">
+      <div className="absolute inset-0 editorial-grid pointer-events-none opacity-40 -z-10" />
 
       <h3 className="text-3xl md:text-4xl font-normal text-slate-800 mb-3">
         ค่อยๆส่องงงงงงงงงงงง
